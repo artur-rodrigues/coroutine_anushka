@@ -31,13 +31,17 @@ class MainActivity : AppCompatActivity() {
         job = CoroutineScope(Main).launch {
             log("Calculation started")
 
-            val stock1 = async(IO) {
+            val stock1 = async(IO, CoroutineStart.LAZY) {
                 getStock1()
             }
 
-            val stock2 = async(IO) {
+            val stock2 = async(IO, CoroutineStart.LAZY) {
                 getStock2()
             }
+
+            delay(4000)
+            log("*************Just before await*****************")
+
             val total = stock1.await() + stock2.await()
 
             val info = "Total is $total"
@@ -55,6 +59,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private suspend fun getStock(delay: Long, stockNumber: Int, result: Int): Int {
+        log("counting stock $stockNumber started")
         delay(delay * 1000)
         log("stock $stockNumber returned")
         return result
