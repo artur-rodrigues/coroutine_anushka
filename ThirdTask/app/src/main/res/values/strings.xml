@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ThirdTask</string>
+    <string name="string_result">String result: </string>
+    <string name="int_result">Int result: </string>
+    <string name="boolean_result">Boolean result: </string>
+    <string name="btn_process">Processar</string>
 </resources>
