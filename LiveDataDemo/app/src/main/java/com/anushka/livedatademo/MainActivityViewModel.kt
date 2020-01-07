@@ -2,6 +2,7 @@ package com.anushka.livedatademo
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.anushka.livedatademo.model.User
 import com.anushka.livedatademo.model.UserRepository
@@ -12,7 +13,12 @@ import kotlinx.coroutines.withContext
 class MainActivityViewModel : ViewModel()  {
 
     private var usersRepository= UserRepository()
-    var users: MutableLiveData<List<User>> = MutableLiveData()
+    var users = liveData(Dispatchers.IO) {
+        val result = usersRepository.getUsers()
+        emit(result)
+    }
+
+    /*var users: MutableLiveData<List<User>> = MutableLiveData()
 
     fun getUsers() {
         viewModelScope.launch {
@@ -22,5 +28,5 @@ class MainActivityViewModel : ViewModel()  {
             }
             users.value = result
         }
-    }
+    }*/
 }
