@@ -14,8 +14,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         CoroutineScope(Dispatchers.Main).launch {
-            Log.i("MyTag","Coroutine luanched from ${Thread.currentThread().name}")
-
+            log("Coroutine luanched from ${Thread.currentThread().name}")
+            DemoClass().test1()
+            log("Came back to Main Activity ${Thread.currentThread().name}")
         }
+    }
+
+    private fun log(message: String) {
+        Log.i("MyTag",message)
     }
 }
